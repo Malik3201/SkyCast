@@ -26,7 +26,7 @@ A modern, multi-page weather application built with HTML, CSS, and JavaScript.
 - REST Countries API
 - Leaflet.js + OpenStreetMap
 - HTML5 Geolocation API
-- Gemini AI API
+
 
 ## Project Structure
 
@@ -65,11 +65,11 @@ The project uses the following API keys:
 
 1. OpenWeatherMap API:
    - Base URL: `https://api.openweathermap.org/data/2.5/`
-   - API Key: `c33e918423e97432058e232d7a0b977b`
+   - API Key: `**************`
 
-2. Gemini Chatbot API:
+2. SkyCast API:
    - Endpoint: `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent`
-   - API Key: `AIzaSyB4_e6cQcaiLiySNcSEG2C-1ukd-aYTABg`
+   - API Key: `********************`
 
 ## Next Steps
 
