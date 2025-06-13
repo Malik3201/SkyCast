@@ -1,0 +1,359 @@
+/* 
+======================
+  Weather Animations
+  - Anime-inspired moving clouds, rain, sun, moon
+======================
+*/
+
+/* Animation Container */
+.weather-animations {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  max-height: 100vh;
+}
+
+/* Clouds Animation */
+.cloud {
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.75;
+  filter: blur(1px);
+  will-change: transform;
+  display: block;
+}
+
+.cloud-1 {
+  width: 200px;
+  height: 100px;
+  top: 10%;
+  left: -200px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="%23fff"><path d="M50,80 C20,83 0,65 0,40 C0,15 25,0 50,0 C75,0 87,20 100,20 C113,20 125,10 150,10 C175,10 200,25 200,50 C200,75 175,90 150,90 C125,90 125,80 100,80 C75,80 75,77 50,80 Z"/></svg>');
+  animation: moveCloud 120s linear infinite;
+}
+
+.cloud-2 {
+  width: 180px;
+  height: 90px;
+  top: 30%;
+  left: -180px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="%23fff"><path d="M40,70 C15,73 0,55 0,35 C0,15 20,0 40,0 C60,0 70,15 90,15 C110,15 115,5 140,5 C165,5 180,20 180,45 C180,70 165,85 140,85 C115,85 110,75 90,75 C70,75 65,67 40,70 Z"/></svg>');
+  animation: moveCloud 90s linear infinite;
+  animation-delay: 5s;
+}
+
+.cloud-3 {
+  width: 150px;
+  height: 75px;
+  top: 50%;
+  left: -150px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 75" fill="%23fff"><path d="M30,60 C10,62 0,47 0,30 C0,13 15,0 30,0 C45,0 52,12 67,12 C82,12 86,4 105,4 C124,4 135,15 135,34 C135,53 124,64 105,64 C86,64 82,56 67,56 C52,56 50,58 30,60 Z"/></svg>');
+  animation: moveCloud 70s linear infinite;
+  animation-delay: 10s;
+}
+
+/* Sun Animation */
+.sun {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  top: 15%;
+  left: -150px;
+  background: radial-gradient(circle at center, #fffaa8 0%, #ffed4f 50%, #ff9900 100%);
+  box-shadow: 0 0 40px #ffed4f, 0 0 80px #ffed4f, 0 0 120px rgba(255, 237, 79, 0.3);
+  transform-origin: center;
+  animation: moveSun 150s linear infinite, glowSun 5s ease-in-out infinite alternate;
+  display: block;
+  opacity: 1;
+}
+
+.sun::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  right: -15px;
+  bottom: -15px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: 0 0 40px rgba(255, 237, 79, 0.3);
+  animation: pulseSun 3s ease-in-out infinite alternate;
+}
+
+/* Moon Animation */
+.moon {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  top: 20%;
+  right: -120px;
+  background: radial-gradient(circle at 70% 30%, #fff 0%, #f5f5f5 30%, #d0d8e3 100%);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.4);
+  animation: moveMoon 180s linear infinite, glowMoon 7s ease-in-out infinite alternate;
+}
+
+.moon::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgba(200, 210, 220, 0.6);
+  filter: blur(4px);
+}
+
+.moon::after {
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: rgba(200, 210, 220, 0.4);
+  filter: blur(3px);
+}
+
+/* Rain Animation */
+.rain-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+.rain-drop {
+  position: absolute;
+  width: 2px;
+  height: 15px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.7));
+  border-radius: 0 0 5px 5px;
+  animation: rainFall linear infinite;
+  opacity: 0;
+}
+
+/* Rain drops at different positions and speeds */
+.rain-drop:nth-child(1) { left: 10%; animation-duration: 0.7s; animation-delay: 0.1s; }
+.rain-drop:nth-child(2) { left: 20%; animation-duration: 0.8s; animation-delay: 0.3s; }
+.rain-drop:nth-child(3) { left: 30%; animation-duration: 0.9s; animation-delay: 0.5s; }
+.rain-drop:nth-child(4) { left: 40%; animation-duration: 0.6s; animation-delay: 0.2s; }
+.rain-drop:nth-child(5) { left: 50%; animation-duration: 0.7s; animation-delay: 0.4s; }
+.rain-drop:nth-child(6) { left: 60%; animation-duration: 0.8s; animation-delay: 0.1s; }
+.rain-drop:nth-child(7) { left: 70%; animation-duration: 0.9s; animation-delay: 0.3s; }
+.rain-drop:nth-child(8) { left: 80%; animation-duration: 0.7s; animation-delay: 0.5s; }
+.rain-drop:nth-child(9) { left: 90%; animation-duration: 0.6s; animation-delay: 0.2s; }
+.rain-drop:nth-child(10) { left: 15%; animation-duration: 0.8s; animation-delay: 0.4s; }
+.rain-drop:nth-child(11) { left: 25%; animation-duration: 0.7s; animation-delay: 0.1s; }
+.rain-drop:nth-child(12) { left: 35%; animation-duration: 0.9s; animation-delay: 0.3s; }
+.rain-drop:nth-child(13) { left: 45%; animation-duration: 0.6s; animation-delay: 0.5s; }
+.rain-drop:nth-child(14) { left: 55%; animation-duration: 0.7s; animation-delay: 0.2s; }
+.rain-drop:nth-child(15) { left: 65%; animation-duration: 0.8s; animation-delay: 0.4s; }
+.rain-drop:nth-child(16) { left: 75%; animation-duration: 0.9s; animation-delay: 0.1s; }
+.rain-drop:nth-child(17) { left: 85%; animation-duration: 0.7s; animation-delay: 0.3s; }
+.rain-drop:nth-child(18) { left: 95%; animation-duration: 0.6s; animation-delay: 0.5s; }
+.rain-drop:nth-child(19) { left: 5%; animation-duration: 0.8s; animation-delay: 0.2s; }
+.rain-drop:nth-child(20) { left: 45%; animation-duration: 0.7s; animation-delay: 0.4s; }
+
+/* Dark mode theme adjustments */
+[data-theme="dark"] .cloud {
+  filter: brightness(0.6) blur(1px);
+}
+
+[data-theme="dark"] .sun {
+  opacity: 0;
+}
+
+[data-theme="dark"] .moon {
+  opacity: 1;
+}
+
+[data-theme="light"] .moon {
+  opacity: 0;
+}
+
+/* Define Keyframes */
+@keyframes moveCloud {
+  0% {
+    transform: translateX(-100px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 200px));
+  }
+}
+
+@keyframes moveSun {
+  0% {
+    transform: translateX(-150px) rotate(0deg);
+  }
+  100% {
+    transform: translateX(calc(100vw + 150px)) rotate(360deg);
+  }
+}
+
+@keyframes glowSun {
+  0% {
+    box-shadow: 0 0 40px #ffed4f, 0 0 80px #ffed4f, 0 0 120px rgba(255, 237, 79, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 60px #ffed4f, 0 0 100px #ffed4f, 0 0 150px rgba(255, 237, 79, 0.4);
+  }
+}
+
+@keyframes pulseSun {
+  0% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 0.1;
+  }
+}
+
+@keyframes moveMoon {
+  0% {
+    transform: translateX(calc(100vw + 120px));
+  }
+  100% {
+    transform: translateX(-120px);
+  }
+}
+
+@keyframes glowMoon {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 0 0 60px rgba(255, 255, 255, 0.5);
+  }
+}
+
+@keyframes rainFall {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+/* Weather condition specific animations */
+body.weather-clear .sun,
+body.weather-few-clouds .sun {
+  display: block;
+  opacity: 1;
+}
+
+body.weather-night .moon {
+  display: block;
+  opacity: 1;
+}
+
+body.weather-clouds .cloud-1,
+body.weather-clouds .cloud-2,
+body.weather-clouds .cloud-3 {
+  opacity: 0.9;
+}
+
+body.weather-rain .rain-container,
+body.weather-drizzle .rain-container,
+body.weather-thunderstorm .rain-container {
+  display: block !important;
+}
+
+body.weather-rain .rain-drop,
+body.weather-drizzle .rain-drop,
+body.weather-thunderstorm .rain-drop {
+  opacity: 1;
+}
+
+/* Default visibility - show sun by default for light theme */
+[data-theme="light"] .sun {
+  display: block;
+  opacity: 1;
+}
+
+[data-theme="dark"] .sun {
+  display: block;
+  opacity: 0.3;
+}
+
+[data-theme="light"] .moon {
+  display: block;
+  opacity: 0;
+}
+
+[data-theme="dark"] .moon {
+  display: block;
+  opacity: 1;
+}
+
+/* Weather-based overrides */
+body.weather-day .sun {
+  display: block;
+  opacity: 1;
+}
+
+body.weather-day .moon {
+  display: block;
+  opacity: 0;
+}
+
+body.weather-night .sun {
+  display: block;
+  opacity: 0.2;
+}
+
+body.weather-night .moon {
+  display: block;
+  opacity: 1;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .sun {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .moon {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .cloud-1 {
+    width: 150px;
+    height: 75px;
+  }
+  
+  .cloud-2 {
+    width: 130px;
+    height: 65px;
+  }
+  
+  .cloud-3 {
+    width: 100px;
+    height: 50px;
+  }
+} 
